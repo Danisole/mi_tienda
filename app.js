@@ -2,6 +2,10 @@ const carrito = document.getElementById('carrito');
 const elementos1 = document.getElementById('list-1');
 const lista = document.querySelector('#lista-carrito tbody');
 const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+// productos
+
+
+
 
 
 cargarEventListeners();
@@ -11,7 +15,7 @@ function cargarEventListeners(){
     elementos1.addEventListener('click', comprarElemento);
     carrito.addEventListener('click', eliminarElemento);
     vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
-     alert();
+    
 
 }
 
@@ -74,4 +78,33 @@ function vaciarCarrito(){
         lista.removeChild(lista.firstChild);
     }
     return false;
+}
+
+// voy a colocar un for para mostrar los productos sin necesidad de un html para cada uno
+
+
+function crearProducto(misArticulos) {
+    const divProducto = document.createElement('div');
+    divProducto.classList.add('product');
+
+    divProducto.innerHTML = `
+        <img src="${misArticulos.img}" alt="">
+        <div class="products-txt">
+            <h3>${misArticulos.titulo}</h3>
+            <p>${misArticulos.descripcion}</p>
+            <p class="precio">${misArticulos.precio}</p>
+            <a href="#" class="agregar-carrito btn-2" data-id="${misArticulos.id}">Agregar al carrito</a>
+        </div>
+    `;
+
+    return divProducto;
+}
+
+// Obtener el contenedor de productos
+const productContent = document.querySelector('.product-content');
+
+// Crear y agregar los productos al contenedor
+for (const articulo of misArticulos) {
+    const productoElemento = crearProducto(articulo);
+    productContent.appendChild(productoElemento);
 }
